@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox, message } from "antd";
-import Navbar from "../../component/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 

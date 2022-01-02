@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Form, Input, Checkbox, Button, message } from "antd";
-import Navbar from "../../component/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { auth, createUserProfileDocument } from "../../firebase/firebase";
 
 import "./auth.scss";
