@@ -1,8 +1,23 @@
+@import "~antd/dist/antd.css";
+
 body {
+  height: unset !important;
+  width: unset !important;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Sans-serif", "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-btn {
+  height: unset;
+  padding: 8px 19px;
+  border-radius: 0px;
+  font-weight: 500;
+}
+.ant-btn-primary {
+  border-color: #3280fe;
+  background: #3280fe;
 }

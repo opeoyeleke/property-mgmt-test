@@ -8,9 +8,11 @@ export default function Navbar() {
   return (
     <div className="nav-container">
       <div className="wrapper">
-        <div className="logo">
-          <div className="icon">A</div> <div className="text">Apartrent</div>
-        </div>
+        <Link to="/">
+          <div className="logo">
+            <div className="icon">A</div> <div className="text">Apartrent</div>
+          </div>
+        </Link>
 
         <ul className="nav-links">
           <li>Contact</li>
@@ -71,7 +73,7 @@ export default function Navbar() {
                 Blog
               </li>
               <li className="link">
-                <Link to="signin">Sign in</Link>
+                <Link to="/signin">Sign in</Link>
               </li>
               <li>
                 <Link to="/signup">

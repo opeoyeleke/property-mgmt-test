@@ -1,0 +1,143 @@
+$pry_color: #42425d;
+
+.nav-wrapper {
+  display: none;
+  @media (max-width: 890px) {
+    display: block;
+  }
+}
+.page-container {
+  display: flex;
+  width: 100%;
+  @media (max-width: 890px) {
+    display: block;
+  }
+  .page-left {
+    width: 30%;
+    background-color: #363449;
+    color: white;
+    padding: 25vh 30px 0 30px;
+    min-width: 300px;
+    min-height: 100vh;
+    a {
+      color: inherit;
+    }
+
+    .title {
+      display: flex;
+      .app-name {
+        font-weight: 700;
+        font-size: 28px;
+        color: white;
+        display: flex;
+        .icon {
+          background-color: #3280fe;
+          color: white;
+          padding: 3px 8px;
+          font-size: 16px;
+          transform: translateY(-10px);
+          margin-right: 7px;
+          font-weight: 500;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .desc {
+      font-size: 1.5rem;
+      margin: 28px 0;
+    }
+    .detail {
+      opacity: 0.6;
+      font-size: 16px;
+    }
+    @media (max-width: 890px) {
+      display: none;
+    }
+  }
+  .page-right {
+    padding: 30px;
+    margin-top: 30px;
+    @media (min-width: 890px) {
+      display: inline-block;
+      padding: 0 20% 0 2%;
+      margin-top: 170px;
+      width: 60%;
+      max-height: 1000px;
+      min-width: 450px;
+    }
+
+    .form-container {
+      min-width: 400px;
+      @media (max-width: 890px) {
+        max-width: 450px;
+        margin: 0 auto;
+        min-width: unset;
+      }
+      &.register {
+        min-width: 500px;
+        @media (max-width: 890px) {
+          min-width: unset;
+        }
+      }
+      .form-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: gray;
+      }
+    }
+    .already {
+      margin-top: 30px;
+      font-size: 16px;
+
+      @media (max-width: 890px) {
+        max-width: 450px !important;
+        margin: 0 auto !important;
+      }
+
+      a {
+        color: #017aff !important;
+        font-weight: 500;
+      }
+    }
+    .ant-form-item-required {
+      color: $pry_color;
+    }
+    .ant-col-sm-13,
+    .ant-col-sm-16 {
+      max-width: unset;
+    }
+    @media (max-width: 890px) {
+      .ant-form-item-required,
+      .ant-form-item-label {
+        display: none;
+      }
+      .ant-col-sm-offset-8 {
+        margin-left: unset;
+      }
+    }
+  }
+}
+
+.login-form-button {
+  margin-right: 10px;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  border-color: $pry_color;
+  background-color: $pry_color;
+}
+
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner,
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-color: $pry_color;
+}
+
+.ant-checkbox-checked::after {
+  border: 1px solid $pry_color;
+}
+
+.ant-checkbox-wrapper {
+  color: $pry_color;
+}
