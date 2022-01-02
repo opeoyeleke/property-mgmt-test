@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import Signin from "./pages/Auth/Signin";
 import Signup from "./pages/Auth/Signup";
 import LoggedinRouter from "./components/LoggedinRouter/Router";
+
 function App() {
   const { user } = useContext(UserContext);
 

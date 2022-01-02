@@ -257,6 +257,10 @@ a {
   color: #333333;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  &:active {
+    opacity: 0.8;
+  }
   .icon {
     background-color: #3280fe;
     color: white;

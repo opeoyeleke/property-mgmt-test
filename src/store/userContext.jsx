@@ -9,7 +9,6 @@ export const UserProvider = ({ children }) => {
   // Login updates the user data with a name parameter
   const handleSignin = (user) => {
     setUser(user);
-    console.log(1111111111111111);
   };
 
   // Logout updates the user data to default

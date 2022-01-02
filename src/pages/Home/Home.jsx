@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as BannerImage } from "../../assets/svg/banner-image.svg";
-import Navbar from "../../component/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import "./home.scss";
 
 export default function Home() {
