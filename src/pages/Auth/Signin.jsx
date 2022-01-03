@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { UserContext } from "../../store/userContext";
 
 const formItemLayout = {
   labelCol: {
@@ -39,6 +40,8 @@ const tailFormItemLayout = {
 const Signin = () => {
   const [form] = Form.useForm();
   const [buttonLoading, setButtonLoading] = useState(false);
+  const { setUserData } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     setButtonLoading(true);
@@ -47,9 +50,11 @@ const Signin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+
+        setUserData({ accessToken: user?.accessToken, email: user?.email });
         setButtonLoading(false);
         message.success("Login successful!");
+        navigate("/dashboard/overview");
       })
 
       .catch((error) => {

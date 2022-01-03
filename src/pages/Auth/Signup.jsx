@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Form, Input, Checkbox, Button, message } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
 import { auth, createUserProfileDocument } from "../../firebase/firebase";
+import { UserContext } from "../../store/userContext";
 
 import "./auth.scss";
 
@@ -41,6 +42,8 @@ const tailFormItemLayout = {
 const Signup = () => {
   const [form] = Form.useForm();
   const [buttonLoading, setButtonLoading] = useState(false);
+  const { setUserData } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     setButtonLoading(true);
@@ -54,10 +57,20 @@ const Signup = () => {
       await createUserProfileDocument(user, {
         firstName: values?.first_name,
         lastName: values?.last_name,
+        displayName: values?.first_name + values?.last_name,
       });
 
+      setUserData({
+        firstName: values?.first_name,
+        lastName: values?.last_name,
+        email: values?.email,
+        accessToken: user?.user?.accessToken,
+      });
+
+      navigate("/dashboard/overview");
+
       setButtonLoading(false);
-      message.success("Registration successfull");
+      message.success("Registration successfull!");
     } catch (error) {
       setButtonLoading(false);
       if (error?.code === "auth/email-already-in-use") {
