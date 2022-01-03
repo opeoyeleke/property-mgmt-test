@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, addDoc, collection } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -14,30 +14,27 @@ const config = {
 };
 
 const firebase = initializeApp(config);
-const db = getFirestore();
-
+const db = getDatabase();
 export const auth = getAuth();
 
-const provider = new GoogleAuthProvider();
-
-provider.setCustomParameters({ prompt: "select_account" });
-
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
-
-  const { email } = userAuth?.user;
+export const writeUserData = async (userAuth, additionalData) => {
+  const { email, uid } = userAuth?.user;
   const createdAt = new Date();
-  try {
-    const docRef = await addDoc(collection(db, "users"), {
-      email,
-      createdAt,
-      ...additionalData,
-    });
 
-    return docRef;
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
+  set(ref(db, "users/" + uid), {
+    email,
+    createdAt,
+    ...additionalData,
+  });
+};
+
+export const readUserData = async (uid, accessToken, callback) => {
+  const userRef = ref(db, "users/" + uid);
+  onValue(userRef, (snapshot) => {
+    const data = snapshot.val();
+
+    callback({ uid, accessToken, ...data });
+  });
 };
 
 export default firebase;

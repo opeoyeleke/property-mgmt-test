@@ -9,7 +9,7 @@ const Portfolio = ({ setHeaderTitle }) => {
   return (
     <div>
       <Helmet>
-        <title>Profile | Dashboard</title>
+        <title>Portfolio | Dashboard</title>
         <meta
           name="description"
           content="Apartrent helps you to organize properties in one place."

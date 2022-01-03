@@ -5,7 +5,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const setUserData = (user) => {
+  const setUserData = async (user) => {
     setUser(user);
   };
 

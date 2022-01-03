@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { auth, readUserData } from "../../firebase/firebase";
 import { UserContext } from "../../store/userContext";
 
 const formItemLayout = {
@@ -44,6 +44,13 @@ const Signin = () => {
   const { setUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const handleSetUserData = (user) => {
+    setUserData(user);
+    setButtonLoading(false);
+    message.success("Login successful!");
+    navigate("/dashboard");
+  };
+
   const onFinish = async (values) => {
     setButtonLoading(true);
     const { email, password } = values;
@@ -51,11 +58,7 @@ const Signin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-
-        setUserData({ accessToken: user?.accessToken, email: user?.email });
-        setButtonLoading(false);
-        message.success("Login successful!");
-        navigate("/dashboard");
+        readUserData(user?.uid, user?.accessToken, handleSetUserData);
       })
 
       .catch((error) => {

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Form, Input, Checkbox, Button, message } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
-import { auth, createUserProfileDocument } from "../../firebase/firebase";
+import { auth, writeUserData } from "../../firebase/firebase";
 import { UserContext } from "../../store/userContext";
 
 import "./auth.scss";
@@ -55,7 +55,7 @@ const Signup = () => {
         values?.password
       );
 
-      await createUserProfileDocument(user, {
+      await writeUserData(user, {
         firstName: values?.first_name,
         lastName: values?.last_name,
         displayName: values?.first_name + values?.last_name,
@@ -65,6 +65,7 @@ const Signup = () => {
         firstName: values?.first_name,
         lastName: values?.last_name,
         email: values?.email,
+        displayName: values?.first_name + values?.last_name,
         accessToken: user?.user?.accessToken,
       });
 
