@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { Layout, Menu } from "antd";
 import {
   PieChartOutlined,
-  SearchOutlined,
-  UserOutlined,
   LogoutOutlined,
   HomeOutlined,
 } from "@ant-design/icons";
@@ -26,13 +24,8 @@ const Sidebar = ({ showSidebar }) => {
         <Menu.Item key="1" icon={<PieChartOutlined />}>
           <NavLink to="/dashboard">Dashboard</NavLink>
         </Menu.Item>
-        <Menu.Item key="2" icon={<SearchOutlined />}>
-          <NavLink to="/dashboard/find">Find</NavLink>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<HomeOutlined />}>
-          <NavLink to="/dashboard/apartments">Apartments</NavLink>
-        </Menu.Item>
-        <Menu.Item key="4" icon={<UserOutlined />}>
+
+        <Menu.Item key="4" icon={<HomeOutlined />}>
           <NavLink to="/dashboard/portfolio">Portfolio</NavLink>
         </Menu.Item>
         <Menu.Item

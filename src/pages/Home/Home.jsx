@@ -12,9 +12,9 @@ export default function Home() {
       <section className="banner">
         <div className="wrapper-banner">
           <div className="banner-left">
-            <div className="row-one">Create & Manage Apartments Easily</div>
+            <div className="row-one">Create & Manage Properties Easily</div>
             <div className="row-two">
-              Makes it easy for you to create apartments along with detailed
+              Makes it easy for you to create properties along with detailed
               information of your choice.
             </div>
             <div className="row-three">

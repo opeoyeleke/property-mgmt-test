@@ -108,7 +108,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="desc">
-            Join people around the world and enjoy a comprehensive asset
+            Join people around the world and enjoy a comprehensive property
             management experience
           </div>
           <div className="detail">Create an account to get started</div>

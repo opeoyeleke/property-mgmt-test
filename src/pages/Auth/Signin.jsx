@@ -97,7 +97,7 @@ const Signin = () => {
           </div>
 
           <div className="desc">
-            Join people around the world and enjoy a comprehensive asset
+            Join people around the world and enjoy a comprehensive property
             management experience
           </div>
           <div className="detail">Sign in to continue</div>

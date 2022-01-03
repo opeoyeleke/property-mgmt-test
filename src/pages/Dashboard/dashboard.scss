@@ -1,0 +1,10 @@
+.dashboard-container {
+  .stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .stat-item {
+      width: 23%;
+    }
+  }
+}

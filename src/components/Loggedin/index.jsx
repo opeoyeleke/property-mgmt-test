@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
 import Dashboard from "../../pages/Dashboard/Dashboard";
-import Apartments from "../../pages/Apartments/Apartments";
-import Find from "../../pages/Find/Find";
 import Portfolio from "../../pages/Portfolio/Portfolio";
 import "./index.scss";
 import Sidebar from "./Sidebar";
@@ -26,16 +24,7 @@ const Router = () => {
               path="/"
               element={<Dashboard {...{ setHeaderTitle }} />}
             />
-            <Route
-              exact
-              path="/apartments"
-              element={<Apartments {...{ setHeaderTitle }} />}
-            />
-            <Route
-              exact
-              path="/find"
-              element={<Find {...{ setHeaderTitle }} />}
-            />
+
             <Route
               exact
               path="/portfolio"
