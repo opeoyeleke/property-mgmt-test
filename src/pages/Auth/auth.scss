@@ -32,6 +32,12 @@ $pry_color: #42425d;
         &:active {
           opacity: 0.8;
         }
+        ::selection {
+          background: none;
+        }
+        ::-moz-selection {
+          background: none;
+        }
         .icon {
           background-color: #3280fe;
           color: white;

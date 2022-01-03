@@ -4,7 +4,7 @@ import { Layout } from "antd";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import Apartments from "../../pages/Apartments/Apartments";
 import Find from "../../pages/Find/Find";
-import Profile from "../../pages/Profile/Profile";
+import Portfolio from "../../pages/Portfolio/Portfolio";
 import "./index.scss";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
@@ -38,8 +38,8 @@ const Router = () => {
             />
             <Route
               exact
-              path="/profile"
-              element={<Profile {...{ setHeaderTitle }} />}
+              path="/portfolio"
+              element={<Portfolio {...{ setHeaderTitle }} />}
             />
           </Routes>
         </Content>

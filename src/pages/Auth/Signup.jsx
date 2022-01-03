@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Form, Input, Checkbox, Button, message } from "antd";
@@ -83,6 +84,18 @@ const Signup = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Get Started for free | Apartrent</title>
+        <meta
+          name="description"
+          content="Create a free account. Apartrent helps you to organize properties in one place."
+        />
+        <meta property="og:title" content="Get Started for free | Apartrent" />
+        <meta
+          property="og:description"
+          content="Create a free account. Apartrent helps you to organize properties in one place."
+        />
+      </Helmet>
       <div className="nav-wrapper">
         <Navbar />
       </div>

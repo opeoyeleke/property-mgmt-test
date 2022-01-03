@@ -258,6 +258,12 @@ a {
   display: flex;
   align-items: center;
   cursor: pointer;
+  ::selection {
+    background: none;
+  }
+  ::-moz-selection {
+    background: none;
+  }
   &:active {
     opacity: 0.8;
   }

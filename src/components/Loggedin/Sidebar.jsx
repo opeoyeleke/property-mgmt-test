@@ -33,7 +33,7 @@ const Sidebar = ({ showSidebar }) => {
           <NavLink to="/dashboard/apartments">Apartments</NavLink>
         </Menu.Item>
         <Menu.Item key="4" icon={<UserOutlined />}>
-          <NavLink to="/dashboard/profile">Profile</NavLink>
+          <NavLink to="/dashboard/portfolio">Portfolio</NavLink>
         </Menu.Item>
         <Menu.Item
           key="5"

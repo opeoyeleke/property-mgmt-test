@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 
-const Find = ({ setHeaderTitle }) => {
+const Portfolio = ({ setHeaderTitle }) => {
   useEffect(() => {
-    setHeaderTitle("Find Apartments");
+    setHeaderTitle("Portfolio");
   });
 
   return (
     <div>
       <Helmet>
-        <title>Find Apartments | Dashboard</title>
+        <title>Profile | Dashboard</title>
         <meta
           name="description"
           content="Apartrent helps you to organize properties in one place."
         />
-        <meta property="og:title" content="Find Apartments | Dashboard" />
+        <meta property="og:title" content="Profile | Dashboard" />
       </Helmet>
-      Find
+      Profile
     </div>
   );
 };
 
-export default Find;
+export default Portfolio;

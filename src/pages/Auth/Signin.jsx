@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -71,6 +72,18 @@ const Signin = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Sign in | Apartrent</title>
+        <meta
+          name="description"
+          content="Sign in. Apartrent helps you to organize properties in one place."
+        />
+        <meta property="og:title" content="Sign in | Apartrent" />
+        <meta
+          property="og:description"
+          content="Sign in. Apartrent helps you to organize properties in one place."
+        />
+      </Helmet>
       <div className="nav-wrapper">
         <Navbar />
       </div>
