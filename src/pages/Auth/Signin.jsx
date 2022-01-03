@@ -54,7 +54,7 @@ const Signin = () => {
         setUserData({ accessToken: user?.accessToken, email: user?.email });
         setButtonLoading(false);
         message.success("Login successful!");
-        navigate("/dashboard/overview");
+        navigate("/dashboard");
       })
 
       .catch((error) => {
@@ -148,7 +148,7 @@ const Signin = () => {
                   htmlType="submit"
                   loading={buttonLoading}
                 >
-                  Log in
+                  Sign in
                 </Button>
               </Form.Item>
             </Form>

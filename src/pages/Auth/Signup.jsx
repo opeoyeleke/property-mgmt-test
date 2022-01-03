@@ -67,7 +67,7 @@ const Signup = () => {
         accessToken: user?.user?.accessToken,
       });
 
-      navigate("/dashboard/overview");
+      navigate("/dashboard");
 
       setButtonLoading(false);
       message.success("Registration successfull!");
