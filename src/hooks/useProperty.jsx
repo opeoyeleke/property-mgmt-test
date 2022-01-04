@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import moment from "moment";
 import { UserContext } from "../store/userContext";
-import { writeProperty, getProperties } from "../firebase/firebase";
+import {
+  writeProperty,
+  getProperties,
+  removeProperty,
+} from "../firebase/firebase";
 
 const useProperty = () => {
   const { user, setUserData } = useContext(UserContext);
@@ -23,7 +27,11 @@ const useProperty = () => {
     await getProperties(user?.uid, handleResponse);
   };
 
-  return { handleCreateProperty, fetchProperties };
+  const deleteProperty = async (id) => {
+    removeProperty(user?.uid, id, fetchProperties);
+  };
+
+  return { handleCreateProperty, fetchProperties, deleteProperty };
 };
 
 export default useProperty;

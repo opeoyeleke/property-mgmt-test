@@ -8,8 +8,11 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import "./property.scss";
+import useProperty from "../../hooks/useProperty";
 
 const Property = ({ item }) => {
+  const { deleteProperty } = useProperty();
+
   const menu = (
     <Menu>
       <Menu.Item key="1">
@@ -19,7 +22,12 @@ const Property = ({ item }) => {
       <Menu.Item key="2">
         <UserSwitchOutlined /> Transfer
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item
+        key="3"
+        onClick={() => {
+          deleteProperty(item?.id);
+        }}
+      >
         <span style={{ color: "red" }}>
           <DeleteOutlined /> Delete
         </span>

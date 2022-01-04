@@ -1,6 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, set, push, onValue } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  onValue,
+  remove,
+} from "firebase/database";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -51,6 +58,12 @@ export const getProperties = async (uid, callback) => {
 
     callback(data);
   });
+};
+
+export const removeProperty = async (uid, propertyId, callback) => {
+  const propertyRef = ref(db, `users/${uid}/properties/${propertyId}`);
+  remove(propertyRef);
+  callback();
 };
 
 export default firebase;
