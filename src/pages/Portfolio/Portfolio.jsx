@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Helmet } from "react-helmet";
 import {
   Tabs,
@@ -12,6 +12,8 @@ import {
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import useProperty from "../../hooks/useProperty";
+import { UserContext } from "../../store/userContext";
+import Property from "../../components/Property/Property";
 import "./portfolio.scss";
 
 const Portfolio = ({ setHeaderTitle }) => {
@@ -50,7 +52,7 @@ const Portfolio = ({ setHeaderTitle }) => {
             }}
           >
             <TabPane tab={<span>Properties</span>} key="1">
-              Tab 1
+              <PropertiesTab />
             </TabPane>
             <TabPane
               tab={
@@ -102,6 +104,7 @@ const AddPropertyTab = ({ setActiveTab }) => {
     setButtonLoading(true);
     handleCreateProperty(values)
       .then(() => {
+        message.success("Property added successfully!");
         setButtonLoading(false);
         form.resetFields();
         setActiveTab("1");
@@ -277,6 +280,39 @@ const AddPropertyTab = ({ setActiveTab }) => {
           </Form.Item>
         </Form>
       </div>
+    </div>
+  );
+};
+
+const PropertiesTab = () => {
+  const { user } = useContext(UserContext);
+
+  const [properties, setProperties] = useState({ keys: [], values: [] });
+
+  useEffect(() => {
+    if (user?.properties) {
+      setProperties({
+        keys: Object.keys(user?.properties),
+        values: Object.values(user?.properties),
+      });
+    }
+    // eslint-disable-next-line
+  }, [user?.properties]);
+
+  return (
+    <div className="properties">
+      {user?.properties && user?.properties !== {} ? (
+        <div>
+          {properties.values.map((item, index) => (
+            <Property
+              key={Math.random()}
+              item={{ ...item, id: properties.keys[index] }}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="no-property">You do not have any property!</div>
+      )}
     </div>
   );
 };
