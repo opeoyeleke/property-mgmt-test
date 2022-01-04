@@ -6,6 +6,8 @@ import {
   getProperties,
   removeProperty,
   editProperty,
+  getUserIdByEmail,
+  transferProperty,
 } from "../firebase/firebase";
 import { message } from "antd";
 
@@ -30,9 +32,7 @@ const useProperty = () => {
   };
 
   const deleteProperty = async (id) => {
-    removeProperty(user?.uid, id, fetchProperties).then(() => {
-      message.success("Property deleted");
-    });
+    removeProperty(user?.uid, id, fetchProperties).then(() => {});
   };
 
   const updateProperty = async (id, property) => {
@@ -44,11 +44,25 @@ const useProperty = () => {
     });
   };
 
+  const moveProperty = async (recipientEmail, property) => {
+    const getUidCallback = (uid) => {
+      if (uid === "NOT_FOUND") {
+        message.error("User does not exist");
+      } else {
+        transferProperty(uid, property);
+        deleteProperty(property?.id);
+      }
+    };
+
+    await getUserIdByEmail(recipientEmail, getUidCallback);
+  };
+
   return {
     createProperty,
     fetchProperties,
     deleteProperty,
     updateProperty,
+    moveProperty,
   };
 };
 

@@ -72,4 +72,42 @@ export const editProperty = async (uid, propertyId, updatedData) => {
   update(propertyRef, JSON.parse(JSON.stringify(updatedData)));
 };
 
+export const getUsers = async (callback) => {
+  const usersRef = ref(db, `users`);
+  onValue(usersRef, (snapshot) => {
+    const data = snapshot.val();
+    callback(data);
+  });
+};
+
+export const getUserIdByEmail = async (email, callback) => {
+  const generateUid = (keysArr, index) => {
+    callback(keysArr[index]);
+  };
+
+  const findUser = (users) => {
+    const usersKeys = Object.keys(users);
+    const usersValues = Object.values(users);
+
+    for (let i = 0; i < usersValues.length; i++) {
+      if (usersValues[i]?.email === email) {
+        return generateUid(usersKeys, i);
+      } else if (
+        i === usersValues.length - 1 &&
+        usersValues[i]?.email !== email
+      ) {
+        callback("NOT_FOUND");
+      }
+    }
+  };
+
+  getUsers(findUser);
+};
+
+export const transferProperty = async (uid, property) => {
+  const createdAt = new Date();
+  const propertiesRef = ref(db, `users/${uid}/properties/${property.id}`);
+  set(propertiesRef, { ...property, createdAt });
+};
+
 export default firebase;

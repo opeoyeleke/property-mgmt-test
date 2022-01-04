@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
 import { UserContext } from "./store/userContext";
@@ -9,10 +9,6 @@ import LoggedinRouter from "./components/Loggedin";
 
 function App() {
   const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    console.log(user);
-  });
 
   return (
     <div className="App">

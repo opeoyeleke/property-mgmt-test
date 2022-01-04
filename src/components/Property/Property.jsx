@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tag, Dropdown, Menu } from "antd";
 import {
   EnvironmentOutlined,
@@ -9,9 +9,12 @@ import {
 } from "@ant-design/icons";
 import "./property.scss";
 import useProperty from "../../hooks/useProperty";
+import TransferProperty from "../../components/TransferProperty/TransferProperty";
 
 const Property = ({ item, handleEditProperty }) => {
-  const { deleteProperty } = useProperty();
+  const { deleteProperty, moveProperty } = useProperty();
+
+  const [showModal, setShowModal] = useState(false);
 
   const menu = (
     <Menu>
@@ -24,7 +27,12 @@ const Property = ({ item, handleEditProperty }) => {
         <EditOutlined /> Edit
       </Menu.Item>
 
-      <Menu.Item key="2">
+      <Menu.Item
+        key="2"
+        onClick={() => {
+          setShowModal(true);
+        }}
+      >
         <UserSwitchOutlined /> Transfer
       </Menu.Item>
       <Menu.Item
@@ -42,6 +50,11 @@ const Property = ({ item, handleEditProperty }) => {
 
   return (
     <div className="property-container">
+      <TransferProperty
+        handleSubmit={moveProperty}
+        propertyId={item}
+        {...{ showModal, setShowModal }}
+      />
       <Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
         <EllipsisOutlined className="menu-icon" />
       </Dropdown>
