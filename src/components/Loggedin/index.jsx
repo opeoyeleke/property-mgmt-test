@@ -21,7 +21,8 @@ const Router = () => {
       message.warning("Please signin to continue!");
       navigate("/signin");
     }
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout>

@@ -6,14 +6,13 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { UserContext } from "../../store/userContext";
 
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
   const { Sider } = Layout;
   const { setUserData } = useContext(UserContext);
-  const navigate = useNavigate();
 
   return (
     <Sider trigger={null} collapsible collapsed={!showSidebar}>
@@ -48,7 +47,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             auth.signOut();
             setUserData(null);
             localStorage.clear();
-            navigate("/");
+            window.location.href = "/";
           }}
         >
           Logout
