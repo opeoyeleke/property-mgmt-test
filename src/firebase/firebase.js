@@ -7,6 +7,7 @@ import {
   push,
   onValue,
   remove,
+  update,
 } from "firebase/database";
 
 const config = {
@@ -44,7 +45,7 @@ export const readUserData = async (uid, accessToken, callback) => {
   });
 };
 
-export const writeProperty = async (uid, property, callback) => {
+export const writeProperty = async (uid, property) => {
   const createdAt = new Date();
   const propertiesRef = ref(db, `users/${uid}/properties`);
   const newPropertyRef = push(propertiesRef);
@@ -64,6 +65,11 @@ export const removeProperty = async (uid, propertyId, callback) => {
   const propertyRef = ref(db, `users/${uid}/properties/${propertyId}`);
   remove(propertyRef);
   callback();
+};
+
+export const editProperty = async (uid, propertyId, updatedData) => {
+  const propertyRef = ref(db, `users/${uid}/properties/${propertyId}`);
+  update(propertyRef, JSON.parse(JSON.stringify(updatedData)));
 };
 
 export default firebase;

@@ -10,7 +10,8 @@ import {
   DatePicker,
   InputNumber,
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import moment from "moment";
+import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 import useProperty from "../../hooks/useProperty";
 import { UserContext } from "../../store/userContext";
 import Property from "../../components/Property/Property";
@@ -19,9 +20,16 @@ import "./portfolio.scss";
 const Portfolio = ({ setHeaderTitle }) => {
   const { TabPane } = Tabs;
   const [activeTab, setActiveTab] = useState("1");
+  const [updatePropertyData, setUpdatePropertyData] = useState(null);
+
   useEffect(() => {
     setHeaderTitle("Portfolio");
   });
+
+  const handleEditProperty = (propertyData) => {
+    setUpdatePropertyData(propertyData);
+    setActiveTab("2");
+  };
 
   return (
     <div>
@@ -45,6 +53,7 @@ const Portfolio = ({ setHeaderTitle }) => {
 
         <div className="portfolio-main">
           <Tabs
+            destroyInactiveTabPane
             activeKey={activeTab}
             defaultActiveKey="1"
             onChange={(activeKey) => {
@@ -52,18 +61,31 @@ const Portfolio = ({ setHeaderTitle }) => {
             }}
           >
             <TabPane tab={<span>Properties</span>} key="1">
-              <PropertiesTab />
+              <PropertiesTab handleEditProperty={handleEditProperty} />
             </TabPane>
             <TabPane
               tab={
-                <span>
-                  <PlusOutlined />
-                  Add Property
-                </span>
+                <>
+                  {updatePropertyData ? (
+                    <span>
+                      <EditOutlined />
+                      Edit Property
+                    </span>
+                  ) : (
+                    <span>
+                      <PlusOutlined />
+                      Add Property
+                    </span>
+                  )}
+                </>
               }
               key="2"
             >
-              <AddPropertyTab setActiveTab={setActiveTab} />
+              <AddPropertyTab
+                setActiveTab={setActiveTab}
+                updatePropertyData={updatePropertyData}
+                setUpdatePropertyData={setUpdatePropertyData}
+              />
             </TabPane>
           </Tabs>
         </div>
@@ -74,7 +96,11 @@ const Portfolio = ({ setHeaderTitle }) => {
 
 export default Portfolio;
 
-const AddPropertyTab = ({ setActiveTab }) => {
+const AddPropertyTab = ({
+  setActiveTab,
+  updatePropertyData,
+  setUpdatePropertyData,
+}) => {
   const formItemLayout = {
     labelCol: {
       xs: {
@@ -98,22 +124,44 @@ const AddPropertyTab = ({ setActiveTab }) => {
   const { TextArea } = Input;
   const [form] = Form.useForm();
   const [buttonLoading, setButtonLoading] = useState(false);
-  const { handleCreateProperty } = useProperty();
+  const { createProperty, updateProperty } = useProperty();
 
-  const createProperty = async (values) => {
+  useEffect(() => {
+    return () => {
+      form.resetFields();
+      setUpdatePropertyData(null);
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  const onFinish = async (values) => {
     setButtonLoading(true);
-    handleCreateProperty(values)
-      .then(() => {
-        message.success("Property added successfully!");
-        setButtonLoading(false);
-        form.resetFields();
-        setActiveTab("1");
-      })
-      .catch((error) => {
-        setButtonLoading(false);
-        message.warning("An error occured. Please try again later!");
-      });
+
+    if (updatePropertyData) {
+      updateProperty(updatePropertyData?.id, values)
+        .then(() => {
+          message.success("Property updated successfully!");
+          setButtonLoading(false);
+          setActiveTab("1");
+        })
+        .catch((error) => {
+          setButtonLoading(false);
+          message.warning("An error occured. Please try again later!");
+        });
+    } else {
+      createProperty(values)
+        .then(() => {
+          message.success("Property added successfully!");
+          setButtonLoading(false);
+          setActiveTab("1");
+        })
+        .catch((error) => {
+          setButtonLoading(false);
+          message.warning("An error occured. Please try again later!");
+        });
+    }
   };
+
   return (
     <div className="add-property">
       <div className="info">
@@ -121,9 +169,19 @@ const AddPropertyTab = ({ setActiveTab }) => {
           {...formItemLayout}
           form={form}
           name="create-property"
-          onFinish={createProperty}
+          onFinish={onFinish}
           layout="vertical"
           scrollToFirstError
+          initialValues={{
+            address: updatePropertyData?.address,
+            baths: updatePropertyData?.baths,
+            built: moment(updatePropertyData?.built.toString()),
+            other: updatePropertyData?.other,
+            property_type: updatePropertyData?.property_type,
+            rooms: updatePropertyData?.rooms,
+            title: updatePropertyData?.title,
+            value: updatePropertyData?.value,
+          }}
         >
           <Form.Item
             label="Title"
@@ -150,10 +208,7 @@ const AddPropertyTab = ({ setActiveTab }) => {
               },
             ]}
           >
-            <Select
-              placeholder=""
-              //  onChange={onCategoryChange}
-            >
+            <Select placeholder="">
               <Option key="0" value="Apartment">
                 Apartment
               </Option>
@@ -275,7 +330,7 @@ const AddPropertyTab = ({ setActiveTab }) => {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={buttonLoading}>
-              Add Property
+              {updatePropertyData ? "Update Property" : "Add Property"}
             </Button>
           </Form.Item>
         </Form>
@@ -284,7 +339,7 @@ const AddPropertyTab = ({ setActiveTab }) => {
   );
 };
 
-const PropertiesTab = () => {
+const PropertiesTab = ({ handleEditProperty }) => {
   const { user } = useContext(UserContext);
 
   const [properties, setProperties] = useState({ keys: [], values: [] });
@@ -307,6 +362,7 @@ const PropertiesTab = () => {
             <Property
               key={Math.random()}
               item={{ ...item, id: properties.keys[index] }}
+              handleEditProperty={handleEditProperty}
             />
           ))}
         </div>

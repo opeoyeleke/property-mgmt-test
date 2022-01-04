@@ -5,12 +5,14 @@ import {
   writeProperty,
   getProperties,
   removeProperty,
+  editProperty,
 } from "../firebase/firebase";
+import { message } from "antd";
 
 const useProperty = () => {
   const { user, setUserData } = useContext(UserContext);
 
-  const handleCreateProperty = async (property) => {
+  const createProperty = async (property) => {
     writeProperty(user?.uid, {
       ...property,
       built: moment(property?.built, "YYYY").year(),
@@ -28,10 +30,26 @@ const useProperty = () => {
   };
 
   const deleteProperty = async (id) => {
-    removeProperty(user?.uid, id, fetchProperties);
+    removeProperty(user?.uid, id, fetchProperties).then(() => {
+      message.success("Property deleted");
+    });
   };
 
-  return { handleCreateProperty, fetchProperties, deleteProperty };
+  const updateProperty = async (id, property) => {
+    editProperty(user?.uid, id, {
+      ...property,
+      built: moment(property?.built, "YYYY").year(),
+    }).then(() => {
+      fetchProperties();
+    });
+  };
+
+  return {
+    createProperty,
+    fetchProperties,
+    deleteProperty,
+    updateProperty,
+  };
 };
 
 export default useProperty;

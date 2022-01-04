@@ -2,13 +2,16 @@
   padding: 20px 0;
   border-bottom: 1px solid #f0f0f0;
   position: relative;
+  &:last-child {
+    border-bottom: unset;
+  }
   .menu-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    right: 0;
     cursor: pointer;
     font-size: 25px;
-    padding: 3px;
+    padding: 1px;
     &:hover {
       color: #3280fe;
     }
@@ -24,13 +27,16 @@
     font-size: 20px;
     font-weight: 500;
     color: rgb(78, 78, 78);
+    text-transform: capitalize;
   }
   .row-three {
     font-size: 13px;
     margin: 3px 0;
+    color: rgb(99, 99, 99);
   }
   .row-four {
-    font-size: 13px;
+    color: rgb(145, 145, 145);
+    font-size: 12px;
   }
   .row-five {
     margin-top: 20px;
@@ -38,5 +44,5 @@
 }
 
 .ant-dropdown-menu-title-content {
-  padding: 2px 5px;
+  padding: 1px 5px;
 }

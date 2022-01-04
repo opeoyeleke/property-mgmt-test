@@ -10,12 +10,17 @@ import {
 import "./property.scss";
 import useProperty from "../../hooks/useProperty";
 
-const Property = ({ item }) => {
+const Property = ({ item, handleEditProperty }) => {
   const { deleteProperty } = useProperty();
 
   const menu = (
     <Menu>
-      <Menu.Item key="1">
+      <Menu.Item
+        key="1"
+        onClick={() => {
+          handleEditProperty(item);
+        }}
+      >
         <EditOutlined /> Edit
       </Menu.Item>
 
@@ -60,13 +65,11 @@ const Property = ({ item }) => {
 
       <div className="row-three">
         {`${item?.rooms} Room${item.rooms !== 1 ? "s" : ""}`} &#8226;{" "}
-        {`${item?.baths} Bath${item.baths !== 1 ? "s" : ""}`}
+        {`${item?.baths} Bath${item.baths !== 1 ? "s" : ""}`} &#8226; Built Year{" "}
+        {item?.built} &#8226; Worth ${parseFloat(item?.value).toLocaleString()}
       </div>
 
-      <div className="row-four">
-        Built Year {item?.built} &#8226; Worth $
-        {parseFloat(item?.value).toLocaleString()}
-      </div>
+      <div className="row-four">{item?.other}</div>
 
       <div className="row-five">
         <EnvironmentOutlined /> {item?.address}
