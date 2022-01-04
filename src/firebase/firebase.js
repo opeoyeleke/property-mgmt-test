@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, push, onValue } from "firebase/database";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -29,11 +29,27 @@ export const writeUserData = async (userAuth, additionalData) => {
 };
 
 export const readUserData = async (uid, accessToken, callback) => {
-  const userRef = ref(db, "users/" + uid);
+  const userRef = ref(db, `users/${uid}`);
   onValue(userRef, (snapshot) => {
     const data = snapshot.val();
 
     callback({ uid, accessToken, ...data });
+  });
+};
+
+export const writeProperty = async (uid, property, callback) => {
+  const createdAt = new Date();
+  const propertiesRef = ref(db, `users/${uid}/properties`);
+  const newPropertyRef = push(propertiesRef);
+  set(newPropertyRef, { ...property, createdAt });
+};
+
+export const getProperties = async (uid, callback) => {
+  const propertiesRef = ref(db, `users/${uid}/properties`);
+  onValue(propertiesRef, (snapshot) => {
+    const data = snapshot.val();
+
+    callback(data);
   });
 };
 

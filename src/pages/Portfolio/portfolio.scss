@@ -1,0 +1,40 @@
+.portfolio-container {
+  .top-section {
+    .page-title-p {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      color: rgb(73, 73, 73);
+    }
+    .page-desc-p {
+      font-size: 15px;
+      color: rgb(155, 155, 155);
+      max-width: 600px;
+    }
+  }
+
+  .portfolio-main {
+    margin-top: 40px;
+    background-color: white;
+    padding: 20px;
+    @media (max-width: 890px) {
+      padding: 0px 10px 20px 10px;
+    }
+    .anticon-plus {
+      margin-right: 3px;
+    }
+
+    .add-property {
+      display: flex;
+      justify-content: center;
+      .info {
+        width: 100%;
+        max-width: 700px;
+        .ant-form-item-label > label {
+          font-size: 15px;
+          color: #494949;
+        }
+      }
+    }
+  }
+}
