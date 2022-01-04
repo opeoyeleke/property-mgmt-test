@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
@@ -42,13 +42,10 @@ const Signin = () => {
   const [form] = Form.useForm();
   const [buttonLoading, setButtonLoading] = useState(false);
   const { setUserData } = useContext(UserContext);
-  const navigate = useNavigate();
 
   const handleSetUserData = (user) => {
     setUserData(user);
     setButtonLoading(false);
-    message.success("Login successful!");
-    navigate("/dashboard");
   };
 
   const onFinish = async (values) => {
@@ -87,6 +84,7 @@ const Signin = () => {
           content="Sign in. Apartrent helps you to organize properties in one place."
         />
       </Helmet>
+
       <div className="nav-wrapper">
         <Navbar />
       </div>
@@ -118,6 +116,7 @@ const Signin = () => {
               className="login-form"
               initialValues={{ remember: true }}
               onFinish={onFinish}
+              size="large"
             >
               <Form.Item
                 name="email"

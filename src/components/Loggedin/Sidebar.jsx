@@ -10,7 +10,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { UserContext } from "../../store/userContext";
 
-const Sidebar = ({ showSidebar }) => {
+const Sidebar = ({ showSidebar, setShowSidebar }) => {
   const { Sider } = Layout;
   const { setUserData } = useContext(UserContext);
   const navigate = useNavigate();
@@ -22,11 +22,23 @@ const Sidebar = ({ showSidebar }) => {
       </div>
 
       <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-        <Menu.Item key="1" icon={<PieChartOutlined />}>
+        <Menu.Item
+          key="1"
+          icon={<PieChartOutlined />}
+          onClick={() => {
+            setShowSidebar(false);
+          }}
+        >
           <NavLink to="/dashboard">Dashboard</NavLink>
         </Menu.Item>
 
-        <Menu.Item key="4" icon={<HomeOutlined />}>
+        <Menu.Item
+          key="4"
+          icon={<HomeOutlined />}
+          onClick={() => {
+            setShowSidebar(false);
+          }}
+        >
           <NavLink to="/dashboard/portfolio">Portfolio</NavLink>
         </Menu.Item>
         <Menu.Item
@@ -36,9 +48,7 @@ const Sidebar = ({ showSidebar }) => {
             auth.signOut();
             setUserData(null);
             localStorage.clear();
-            setTimeout(function () {
-              navigate("/");
-            }, 1000);
+            navigate("/");
           }}
         >
           Logout

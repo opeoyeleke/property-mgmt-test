@@ -20,6 +20,7 @@ const Dashboard = ({ setHeaderTitle }) => {
       </Helmet>
 
       <div className="dashboard-container">
+        <div className="greeting">👋🏼Welcome</div>
         <div className="stats">
           <div className="stat-item">
             <Card>

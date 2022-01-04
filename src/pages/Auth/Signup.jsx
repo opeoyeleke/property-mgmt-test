@@ -58,15 +58,16 @@ const Signup = () => {
       await writeUserData(user, {
         firstName: values?.first_name,
         lastName: values?.last_name,
-        displayName: values?.first_name + values?.last_name,
+        displayName: (values?.first_name + values?.last_name).toLowerCase(),
       });
 
       setUserData({
         firstName: values?.first_name,
         lastName: values?.last_name,
         email: values?.email,
-        displayName: values?.first_name + values?.last_name,
+        displayName: (values?.first_name + values?.last_name).toLowerCase(),
         accessToken: user?.user?.accessToken,
+        uid: user?.user?.uid,
       });
 
       navigate("/dashboard");
@@ -97,6 +98,7 @@ const Signup = () => {
           content="Create a free account. Apartrent helps you to organize properties in one place."
         />
       </Helmet>
+
       <div className="nav-wrapper">
         <Navbar />
       </div>
@@ -126,6 +128,7 @@ const Signup = () => {
               name="register"
               onFinish={onFinish}
               scrollToFirstError
+              size="large"
             >
               <Form.Item
                 name="first_name"

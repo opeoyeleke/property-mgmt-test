@@ -1,10 +1,24 @@
 .dashboard-container {
+  .greeting {
+    font-size: 25px;
+    margin-bottom: 30px;
+    @media (max-width: 890px) {
+      margin-bottom: 15px;
+    }
+  }
   .stats {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    @media (max-width: 890px) {
+      display: block;
+    }
     .stat-item {
       width: 23%;
+      @media (max-width: 890px) {
+        width: 100%;
+        margin-bottom: 10px;
+      }
     }
   }
 }
