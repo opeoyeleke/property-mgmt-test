@@ -25,7 +25,7 @@ const HeaderComponent = ({ showSidebar, setShowSidebar, headerTitle }) => {
       </div>
 
       <div className="header-right">
-        <Panda style={{ fontSize: "32px" }} />
+        <Panda style={{ fontSize: "28px" }} />
         <span> {user?.firstName ? `Hi ${user?.firstName}` : "Welcome"}!</span>
       </div>
     </Header>
