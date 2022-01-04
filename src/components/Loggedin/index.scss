@@ -21,6 +21,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media (max-width: 890px) {
+    padding: 0 10px;
+  }
   .header-left {
     display: flex;
     .anticon {
@@ -32,6 +35,10 @@
       font-size: 25px;
       font-weight: 600;
       color: #42425d;
+      @media (max-width: 890px) {
+        font-size: 21px;
+        margin-left: 10px;
+      }
     }
   }
 
@@ -39,10 +46,18 @@
     display: flex;
     align-items: center;
     padding-right: 20px;
+    @media (max-width: 890px) {
+      padding-right: unset;
+    }
     span {
       font-size: 18px;
       font-weight: 500;
+      color: #42425d;
       padding-left: 10px;
+      text-transform: capitalize;
+      @media (max-width: 890px) {
+        font-size: 15px;
+      }
     }
   }
 }
@@ -54,6 +69,13 @@
 
   .main-section {
     min-width: 100vw;
+  }
+}
+
+.ant-layout-content {
+  overflow-y: scroll;
+  @media (max-width: 890px) {
+    padding: 15px;
   }
 }
 

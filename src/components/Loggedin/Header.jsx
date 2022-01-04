@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Layout } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { ReactComponent as Panda } from "../../assets/svg/panda.svg";
+import { UserContext } from "../../store/userContext";
 const { Header } = Layout;
 
 const HeaderComponent = ({ showSidebar, setShowSidebar, headerTitle }) => {
+  const { user } = useContext(UserContext);
   return (
     <Header>
       <div className="header-left">
@@ -24,7 +26,7 @@ const HeaderComponent = ({ showSidebar, setShowSidebar, headerTitle }) => {
 
       <div className="header-right">
         <Panda style={{ fontSize: "32px" }} />
-        <span>Welcome!</span>
+        <span> {user?.firstName ? `Hi ${user?.firstName}` : "Welcome"}!</span>
       </div>
     </Header>
   );

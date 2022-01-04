@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import { UserContext } from "./store/userContext";
 import Home from "./pages/Home/Home";
@@ -18,8 +18,16 @@ function App() {
     <div className="App">
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/signin" element={<Signin />} />
-        <Route exact path="/signup" element={<Signup />} />
+        <Route
+          exact
+          path="/signin"
+          element={user ? <Navigate replace to="/dashboard" /> : <Signin />}
+        />
+        <Route
+          exact
+          path="/signup"
+          element={user ? <Navigate replace to="/dashboard" /> : <Signup />}
+        />
         <Route path="/dashboard/*" element={<LoggedinRouter />} />
       </Routes>
     </div>
